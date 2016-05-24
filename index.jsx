@@ -35,7 +35,7 @@ var Board = React.createClass({
 			lists.push(<List key={i}/>);
 			lists.push(<br key={i + 20}/>);
 			lists.push(<br key={i + 30}/>);
-			lists.push(<br key={i + 0}/>);
+			lists.push(<br key={i + 40}/>);
 		}
 		return (
 			<div className="list">
