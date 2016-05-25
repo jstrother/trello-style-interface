@@ -16,6 +16,8 @@ var List = function(props) {
 		<div className="list">
 			<div className="list-title">{props.title}</div>
 			<br />
+			<input className="add-input" />
+			<button onClick={props.onClick}>{props.text}</button>
 			<hr />
 			<br />
 		</div>
