@@ -27,7 +27,7 @@ var List = React.createClass({
 					);
 				})}
 				<input className="add-input" onChange={this.props.onAddInputChanged} />
-				<button onClick={this.props.onClick}>{this.props.text}</button>
+				<button onClick={this.props.onAddClick}>{this.props.text}</button>
 				<hr />
 				<br />
 			</div>
@@ -39,9 +39,9 @@ var Board = React.createClass({
 	onAddInputChanged: function() {
 		console.log("onAddInputChanged");
 	},
-	onClick: function() {
-		console.log("onClick");
-		// this.onAddInputChanged
+	onAddClick: function() {
+		console.log("onAddClick");
+		this.onAddInputChanged
 	},
 	render: function() {
 		return (
@@ -51,7 +51,7 @@ var Board = React.createClass({
 					return(
 						<List title={list.title}
 							onAddInputChanged={this.onAddInputChanged}
-							onClick={this.onClick}
+							onAddClick={this.onAddClick}
 							text="Add Band"
 							cards={list.cards}
 							key={index} />
