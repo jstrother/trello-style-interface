@@ -41,7 +41,7 @@ var Board = React.createClass({
 	},
 	onAddClick: function() {
 		console.log("onAddClick");
-		this.onAddInputChanged
+		// this.onAddInputChanged
 	},
 	render: function() {
 		return (
