@@ -3,10 +3,12 @@ var ReactDOM = require('react-dom');
 
 var Card = React.createClass({
 	render: function() {
+		console.log(this.props);
 		return (
 			<div className="card">
 				<div className="card-title">{this.props.title}</div>
 				<div className="card-body">{this.props.body}</div>
+				<button className="favorite-band" onClick={this.props.onFavClick}>Mark as Favorite</button>
 				<hr />
 			</div>
 		);
@@ -14,7 +16,11 @@ var Card = React.createClass({
 });
 
 var List = React.createClass({
+	_onAddClick: function() {
+		this.props.onAddClick(this.refs.bandName.value);
+	},
 	render: function() {
+		console.log(this.props);
 		return (
 			<div className="list">
 				<h2>{this.props.title}</h2>
@@ -23,11 +29,12 @@ var List = React.createClass({
 					return (
 						<Card title={card.title}
 									body={card.body}
+									onFavClick={this.props.onFavClick}
 									key={index} />
 					);
-				})}
-				<input className="add-input" onChange={this.props.onAddInputChanged} />
-				<button onClick={this.props.onAddClick}>{this.props.text}</button>
+				}.bind(this))}
+				<input className="add-input" ref="bandName" onChange={this.props.onAddInputChanged} />
+				<button onClick={this._onAddClick}>{this.props.text}</button>
 				<hr />
 				<br />
 			</div>
@@ -36,22 +43,31 @@ var List = React.createClass({
 });
 
 var Board = React.createClass({
+	getInitialState: function() {
+		return this.props.data;
+	},
 	onAddInputChanged: function() {
 		console.log("onAddInputChanged");
 	},
-	onAddClick: function() {
+	onAddClick: function(value) {
 		console.log("onAddClick");
-		// this.onAddInputChanged
+		console.log(value);
+		// creates new card
+	},
+	onFavClick: function() {
+		console.log("onFavClick");
+		// updates specific card to have class="favorite", then special markings
 	},
 	render: function() {
 		return (
 			<div className="board">
-				<h1>{this.props.data.title}</h1>
-				{this.props.data.lists.map(function(list, index) {
+				<h1>{this.state.title}</h1>
+				{this.state.lists.map(function(list, index) {
 					return(
 						<List title={list.title}
 							onAddInputChanged={this.onAddInputChanged}
 							onAddClick={this.onAddClick}
+							onFavClick={this.onFavClick}
 							text="Add Band"
 							cards={list.cards}
 							key={index} />
