@@ -3,9 +3,10 @@ var ReactDOM = require('react-dom');
 
 var Card = React.createClass({
 	render: function() {
-		console.log(this.props);
+		console.log('Props from Card', this.props);
+		console.log('State from Card', this.state);
 		return (
-			<div className="card">
+			<div className="card" favorite='false'>
 				<div className="card-title">{this.props.title}</div>
 				<div className="card-body">{this.props.body}</div>
 				<button className="favorite-band" onClick={this.props.onFavClick}>Mark as Favorite</button>
@@ -20,7 +21,8 @@ var List = React.createClass({
 		this.props.onAddClick(this.refs.bandName.value);
 	},
 	render: function() {
-		console.log(this.props);
+		console.log('Props from List', this.props);
+		console.log('State from List', this.state);
 		return (
 			<div className="list">
 				<h2>{this.props.title}</h2>
@@ -29,6 +31,7 @@ var List = React.createClass({
 					return (
 						<Card title={card.title}
 									body={card.body}
+									// favorite={this.state.favorite}
 									onFavClick={this.props.onFavClick}
 									key={index} />
 					);
@@ -56,7 +59,9 @@ var Board = React.createClass({
 	},
 	onFavClick: function() {
 		console.log("onFavClick");
-		// updates specific card to have class="favorite", then special markings
+		this.setState({
+			favorite: !this.state.favorite
+		})
 	},
 	render: function() {
 		return (
