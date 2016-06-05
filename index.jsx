@@ -2,14 +2,16 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var Card = React.createClass({
+	_onFavClick: function() {
+		this.props.onFavClick(this.props.listIndex, this.props.cardIndex);
+	},
 	render: function() {
-		console.log('Props from Card', this.props);
-		console.log('State from Card', this.state);
+		var favorite = (this.props.favorite) ? 'favorite' : '';
 		return (
-			<div className="card" favorite='false'>
+			<div className={favorite + ' card'}>
 				<div className="card-title">{this.props.title}</div>
 				<div className="card-body">{this.props.body}</div>
-				<button className="favorite-band" onClick={this.props.onFavClick}>Mark as Favorite</button>
+				<button className="favorite-band" onClick={this._onFavClick}>Mark as Favorite</button>
 				<hr />
 			</div>
 		);
@@ -18,11 +20,11 @@ var Card = React.createClass({
 
 var List = React.createClass({
 	_onAddClick: function() {
-		this.props.onAddClick(this.refs.bandName.value);
+		this.props.onAddClick(this.props.listIndex, this.refs.bandName.value, this.refs.bandBody.value);
+		this.refs.bandName.value = '';
+		this.refs.bandBody.value = '';
 	},
 	render: function() {
-		console.log('Props from List', this.props);
-		console.log('State from List', this.state);
 		return (
 			<div className="list">
 				<h2>{this.props.title}</h2>
@@ -31,12 +33,17 @@ var List = React.createClass({
 					return (
 						<Card title={card.title}
 									body={card.body}
-									// favorite={this.state.favorite}
+									favorite={card.favorite}
 									onFavClick={this.props.onFavClick}
-									key={index} />
+									key={index}
+									listIndex={this.props.listIndex}
+									cardIndex={index} />
 					);
 				}.bind(this))}
-				<input className="add-input" ref="bandName" onChange={this.props.onAddInputChanged} />
+				<label for="add-input">Enter Band Name: </label>
+				<input className="add-input" ref="bandName" /><br /><br />
+				<label for="body-input">Add three songs: </label>
+				<input className="body-input" ref="bandBody" /><br /><br />
 				<button onClick={this._onAddClick}>{this.props.text}</button>
 				<hr />
 				<br />
@@ -49,19 +56,20 @@ var Board = React.createClass({
 	getInitialState: function() {
 		return this.props.data;
 	},
-	onAddInputChanged: function() {
-		console.log("onAddInputChanged");
+	onAddClick: function(listIndex, value, body) {
+		var oldState = this.state;
+		var cardLength = oldState.lists[listIndex].cards.length;
+		oldState.lists[listIndex].cards[cardLength] = {
+			title: value,
+			body: body
+		};
+		this.setState(oldState);
 	},
-	onAddClick: function(value) {
-		console.log("onAddClick");
-		console.log(value);
-		// creates new card
-	},
-	onFavClick: function() {
-		console.log("onFavClick");
-		this.setState({
-			favorite: !this.state.favorite
-		})
+	onFavClick: function(listIndex, cardIndex) {
+		var oldState = this.state;
+		var updatedFavorite = !this.state.lists[listIndex].cards[cardIndex].favorite;
+		oldState.lists[listIndex].cards[cardIndex].favorite = updatedFavorite;
+		this.setState(oldState);
 	},
 	render: function() {
 		return (
@@ -75,7 +83,8 @@ var Board = React.createClass({
 							onFavClick={this.onFavClick}
 							text="Add Band"
 							cards={list.cards}
-							key={index} />
+							key={index} 
+							listIndex={index} />
 					);
 				}.bind(this))}
 			</div>
