@@ -5,7 +5,7 @@ const should = require('chai').should();
 const Card = require('../card');
 
 describe('Card component', function() {
-	it('renders a card with title and body', function() {
+	it('Renders a card with title and body', function() {
 		const title = "Title of a rendered card";
 		const body = "The text area that is the body of a rendered card.";
 
