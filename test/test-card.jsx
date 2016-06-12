@@ -13,5 +13,8 @@ describe('Card component', function() {
 		renderer.render(<Card title={title} body={body} />);
 		const result = renderer.getRenderOutput();
 		result.props.className.should.equal('card');
+
+		// Add further tests to make sure that props.title and props.body come through OK
+		// Also add test to make sure button className='favorite-band' works
 	});
 });

@@ -28,5 +28,8 @@ describe('Board component', function() {
 		renderer.render(<Board lists={List}} />);
 		const result = renderer.getRenderOutput();
 		result.props.className.should.equal('board');
+
+		// Add further tests to make sure number of Lists is correct
+		// Also test for List props title and cards are coming through OK
 	});
 });

@@ -21,5 +21,9 @@ describe('List component', function() {
 		renderer.render(<List title={listTitle} cards={Card} />);
 		const result = renderer.getRenderOutput();
 		result.props.className.should.equal('list');
+
+		// Add further tests to make sure that List title comes through OK
+		// Also add tests to make sure Cards render properly and that they have props of title and body
+		// Test to make sure that correct number of Cards are being rendered
 	});
 });
