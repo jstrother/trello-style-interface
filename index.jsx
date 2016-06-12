@@ -1,7 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-const Board = require('./board');
+const Board = require('./components/board');
 
 var bands = {
 	title: "Bands",

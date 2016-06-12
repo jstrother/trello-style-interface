@@ -1,6 +1,6 @@
 const React = require('react');
 
-const Card = require('./components/card');
+const Card = require('./card');
 
 const List = React.createClass({
 	_onAddClick: function() {

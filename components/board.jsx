@@ -1,6 +1,6 @@
 const React = require('react');
 
-const List = require('./components/list');
+const List = require('./list');
 
 const Board = React.createClass({
 	getInitialState: function() {
