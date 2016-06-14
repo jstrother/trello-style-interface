@@ -9,23 +9,15 @@ describe('Board component', function() {
 		const cardTitle = "Title of a rendered Card";
 		const cardBody = "The text area that is the body of a rendered Card.";
 
-		const List = [
-			{
+		const Card = {
 				title: cardTitle,
 				body: cardBody
-			},
-			{
-				title: cardTitle,
-				body: cardBody
-			},
-			{
-				title: cardTitle,
-				body: cardBody
-			}
-		];
+			};
+
+		const List = [Card, Card, Card];
 
 		const renderer = TestUtils.createRenderer();
-		renderer.render(<Board lists={List}} />);
+		renderer.render(<Board lists={List} />);
 		const result = renderer.getRenderOutput();
 		result.props.className.should.equal('board');
 

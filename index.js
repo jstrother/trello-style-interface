@@ -49,60 +49,39 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(38);
 	
-	var Card = function Card() {
-		var title = "A Card for Stuff";
-		var body = "The things we are writing go here!";
-		return React.createElement(
-			'div',
-			{ className: 'card' },
-			React.createElement(
-				'div',
-				{ className: 'card-title' },
-				title
-			),
-			React.createElement('hr', null),
-			React.createElement(
-				'div',
-				{ className: 'card-body' },
-				body
-			)
-		);
+	var Board = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/board\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var bands = {
+		title: "Bands",
+		lists: [{
+			title: "Seattle Bands",
+			cards: [{
+				title: "Nirvana",
+				body: "Nevermind, In Bloom, Negative Creep"
+			}, {
+				title: "Pearl Jam",
+				body: "Alive, Jeremy, Elderly Woman Behind the Counter in a Small Town"
+			}, {
+				title: "Soundgarden",
+				body: "Spoonman, Black Hole Sun, Burden in My Hand"
+			}]
+		}, {
+			title: "Not Seattle Bands",
+			cards: [{
+				title: "Metallica",
+				body: "Unforgiven, Seek and Destroy, Blackened"
+			}, {
+				title: "The Who",
+				body: "My Generation, Love Reign O'er Me, Behind Blue Eyes"
+			}, {
+				title: "Led Zepplin",
+				body: "Immigrant Song, Ramble On, Stairway to Heaven"
+			}]
+		}]
 	};
 	
-	var List = React.createClass({
-		displayName: 'List',
-	
-		render: function render() {
-			var cards = [];
-			for (i = 0; i < 5; i++) {
-				cards.push(React.createElement(Card, { key: i }));
-			}
-			return React.createElement(
-				'div',
-				{ className: 'list' },
-				cards
-			);
-		}
-	});
-	
-	var Board = React.createClass({
-		displayName: 'Board',
-	
-		render: function render() {
-			var lists = [];
-			for (i = 0; i < 5; i++) {
-				lists.push(React.createElement(List, { key: i }));
-			}
-			return React.createElement(
-				'div',
-				{ className: 'list' },
-				Lists
-			);
-		}
-	});
-	
 	document.addEventListener('DOMContentLoaded', function () {
-		ReactDOM.render(React.createElement(Board, null), document.getElementById('app'));
+		ReactDOM.render(React.createElement(Board, { data: bands }), document.getElementById('app'));
 	});
 
 /***/ },

@@ -7,7 +7,7 @@ const Card = React.createClass({
 	render: function() {
 		const favorite = (this.props.favorite) ? 'favorite' : '';
 		return (
-			<div className={favorite + ' card'}>
+			<div className={'card' + ' ' + favorite}>
 				<div className="card-title">{this.props.title}</div>
 				<div className="card-body">{this.props.body}</div>
 				<button className="favorite-band" onClick={this._onFavClick}>Mark as Favorite</button>
