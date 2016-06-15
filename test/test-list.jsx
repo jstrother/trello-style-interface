@@ -6,7 +6,7 @@ const List = require('../components/list');
 
 describe('List component', function() {
 	it('Renders a List component', function() {
-		const listTitle = "Title of a rendered Card";
+		const listTitle = "Title of a rendered List";
 		const cardTitle = "Title of a rendered Card";
 		const cardBody = "The text area that is the body of a rendered Card.";
 
@@ -22,8 +22,17 @@ describe('List component', function() {
 		const result = renderer.getRenderOutput();
 		result.props.className.should.equal('list');
 
-		// Add further tests to make sure that List title comes through OK
-		// Also add tests to make sure Cards render properly and that they have props of title and body
-		// Test to make sure that correct number of Cards are being rendered
+		var list = result.props.children;
+		list[0].props.children.should.equal(listTitle);
+		for (var i = 0; i < list.length; i++) {
+			if (this.key != null) {
+				var count = 0;
+				count++;
+				this.props.title.should.equal(cardTitle);
+				this.props.body.should.equal(cardBody);
+				count.should.equal(1);
+				count = 0;
+			};
+		};
 	});
 });

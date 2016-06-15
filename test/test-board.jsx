@@ -6,6 +6,8 @@ const Board = require('../components/board');
 
 describe('Board component', function() {
 	it('Renders a Board component', function() {
+		const boardTitle = "Title of a rendered Board";
+		const listTitle = "Title of a rendered List";
 		const cardTitle = "Title of a rendered Card";
 		const cardBody = "The text area that is the body of a rendered Card.";
 
@@ -14,12 +16,16 @@ describe('Board component', function() {
 				body: cardBody
 			};
 
-		const List = [Card, Card, Card];
+		const List = {
+			title: listTitle,
+			cards: Card
+		};
 
 		const renderer = TestUtils.createRenderer();
 		renderer.render(<Board lists={List} />);
 		const result = renderer.getRenderOutput();
 		result.props.className.should.equal('board');
+		console.log(result.props);
 
 		// Add further tests to make sure number of Lists is correct
 		// Also test for List props title and cards are coming through OK
