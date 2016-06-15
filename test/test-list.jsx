@@ -24,15 +24,6 @@ describe('List component', function() {
 
 		var list = result.props.children;
 		list[0].props.children.should.equal(listTitle);
-		for (var i = 0; i < list.length; i++) {
-			if (this.key != null) {
-				var count = 0;
-				count++;
-				this.props.title.should.equal(cardTitle);
-				this.props.body.should.equal(cardBody);
-				count.should.equal(1);
-				count = 0;
-			};
-		};
+		list[2].length.should.equal(1);
 	});
 });

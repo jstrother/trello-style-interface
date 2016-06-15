@@ -18,14 +18,23 @@ describe('Board component', function() {
 
 		const List = {
 			title: listTitle,
-			cards: Card
+			cards: [Card]
+		};
+
+		const Boards = {
+			title: boardTitle,
+			lists: [List]
 		};
 
 		const renderer = TestUtils.createRenderer();
-		renderer.render(<Board lists={List} />);
+		renderer.render(<Board data={Boards} />);
 		const result = renderer.getRenderOutput();
 		result.props.className.should.equal('board');
-		console.log(result.props);
+
+		const board = result.props.children;
+		board[0].props.children.should.equal(boardTitle);
+		board[1][0].props.title.should.equal(listTitle);
+		board[1].length.should.equal(1);
 
 		// Add further tests to make sure number of Lists is correct
 		// Also test for List props title and cards are coming through OK
